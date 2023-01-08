@@ -9,9 +9,10 @@ The MAX31329 has a trickle charger that is designed to charge a super cap as the
 #include <MAX31329.h>
 
 MAX31329 rtc;
+void setup() {
+  rtc.begin(4, 5); //SDA, SCL
 
-rtc.begin(5, 4);
-
-rtc.enableCharger(true);
-rtc.enableCharger(false);
+  rtc.enableCharger(true);
+  rtc.enableCharger(false);
+}
 ```
