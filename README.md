@@ -1,6 +1,6 @@
 # MAX31329
 Library for the MAX 31329 Real Time Clock using Wire for I2C
-![Max31329 Dev Board](MAX31329_dev.jpg?raw=true "Max 31329")
+![Max31329 Dev Board](Max31329_DEV.jpeg?raw=true "Max 31329")
 
 The MAX31329 is similar to the DS3231 and DS1307 but the time registers start at 0x06 instead of at 0x00, additionally in order to read a byte from a specific register it is required that you write the byte you want to read from first and the restart not stop before you read the byte, which is another slight diference to the DS3231.
 This basic library always the 7 bytes of time to be read and written using a tmElements_t structure which makes provision for 7 bytes (secs, min, hr, dow, date, mth, yr), the structure can be passed in as an arguement and the structure will be written to and use to write to the RTC.
