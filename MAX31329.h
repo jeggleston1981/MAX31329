@@ -51,26 +51,27 @@ class MAX31329
 		};
 
 		static constexpr uint8_t
-			MAX_ADR				{0x68},
-			MAX_STATUS			{0x00},
-			MAX_INT_EN			{0x01},
-			MAX_RTC_RESET		{0x02},
-			MAX_CONFIG			{0x03},
-			MAX_CONFIG2			{0x04},
+			MAX_ADR						{0x68},
+			MAX_STATUS				{0x00},
+			MAX_INT_EN				{0x01},
+			MAX_RTC_RESET			{0x02},
+			MAX_CONFIG				{0x03},
+			MAX_CONFIG2				{0x04},
 			MAX_TIMER_CONFIG	{0x05},
-			MAX_SECONDS			{0x06},
-			MAX_MINUTES			{0x07},
-			MAX_HOURS			{0x08},
-			MAX_DAY				{0x09},
-			MAX_DATE			{0x0A},
-			MAX_MONTH			{0x0B},
-			MAX_YEAR			{0x0C},
+			MAX_SECONDS				{0x06},
+			MAX_MINUTES				{0x07},
+			MAX_HOURS					{0x08},
+			MAX_DAY						{0x09},
+			MAX_DATE					{0x0A},
+			MAX_MONTH					{0x0B},
+			MAX_YEAR					{0x0C},
 			MAX_PWR_MANAGE		{0x18},
-			MAX_CHARGER			{0x19},
-			CLKO_HZ				{5},
-			MAX_CLKO			{7},
+			MAX_CHARGER				{0x19},
+			TM_BYTES					{7},
+			CLKO_HZ						{5},
+			MAX_CLKO					{7},
 			MAX_HR1224		    {6},        // Hours register 12 or 24 hour mode (24 hour mode==0)
-        	MAX_CENTURY     	{7};
+      MAX_CENTURY   		{7};
 
     	MAX31329() {};
     	void begin(int SDA, int SCL);
