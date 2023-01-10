@@ -11,10 +11,10 @@ void MAX31329::begin(int SDA, int SCL)
 //Returns 0 if Successful transaction on I2C bus
 uint8_t MAX31329::read(tmElements_t &tm)
 {
-	Wire.beginTransmission(0x68);
-  Wire.write(0x06);
+	Wire.beginTransmission(MAX_ADR);
+  Wire.write(MAX_SECONDS);
   Wire.endTransmission(false);
-  Wire.requestFrom(0x68, 7); //request 7 bytes (secs, min, hr, dow, date, mth, yr)
+  Wire.requestFrom(MAX_ADR, TM_BYTES); //request 7 bytes (secs, min, hr, dow, date, mth, yr)
   while(Wire.available()){
   	tm.Second = bcd2dec(Wire.read());
   	tm.Minute = bcd2dec(Wire.read());
@@ -29,8 +29,8 @@ uint8_t MAX31329::read(tmElements_t &tm)
 
 uint8_t MAX31329::write(tmElements_t &tm)
 {
-	Wire.beginTransmission(0x68);
-  Wire.write(0x06);
+	Wire.beginTransmission(MAX_ADR);
+  Wire.write(MAX_SECONDS);
 	Wire.write(dec2bcd(tm.Second));
 	Wire.write(dec2bcd(tm.Minute));
 	Wire.write(dec2bcd(tm.Hour));
@@ -78,7 +78,7 @@ void MAX31329::squareWave(SQWAVE_FREQ freq)
 {
     uint8_t config2 = readRTC(MAX_CONFIG2);
     if (freq >= SQWAVE_NONE) {
-        config2 & _BV(MAX_CLKO); //set bit 7 to 1 to disable Square Wave and enable INT
+        config2 &= ~_BV(MAX_CLKO); //set bit 7 to 1 to disable Square Wave and enable INT
     }
     else {
         config2 = (config2 & 0x1F) | ((0x04 | freq ) << CLKO_HZ); // Set output frequency
