@@ -21,12 +21,13 @@ class MAX31329
 		};
 
 		enum CHARGER {
-			K3_SCHOTTKY,
-			K6_SCHOTTKY,
-			K11_SCHOTTKY,
-			K3_SCHOTTKY_DO,
-			K6_SCHOTTKY_DO,
-			K11_SCHOTTKY_DO
+			K3_SCHOTTKY = 0,
+			K6_SCHOTTKY = 2,
+			K11_SCHOTTKY = 3,
+			K3_SCHOTTKY_DO = 5,
+			K6_SCHOTTKY_DO = 6,
+			K11_SCHOTTKY_DO = 7,
+			DISABLE = 8
 		};
 
 		enum ALARM_TYPES {
@@ -81,6 +82,7 @@ class MAX31329
     	uint8_t write(tmElements_t &tm);
     	void squareWave(SQWAVE_FREQ freq);
     	void enableCharger(bool charge);
+	void enableCharger(CHARGER charge);
     	uint8_t readRTC(uint8_t addr, uint8_t* values, uint8_t nBytes);
     	uint8_t readRTC(uint8_t addr);
     	uint8_t writeRTC(uint8_t addr, uint8_t* values, uint8_t nBytes);
