@@ -20,6 +20,26 @@ void setup() {
 The SDA and SCL pin numbers need to be entered into begin() fucntion, ESP8266 SDA - 4, SCL - 5
 For the ESP32 SDA - 21 SCL - 22
 
+The read() and write() functions will read and write a tmElements_t structure to the real-time clock in a single transaction over the I2C bus.
+If we declare the tmElements_t structure in our sketch and call it tm we can assign values to each item these values are unit8_t ( a single byte)
+
+```
+tmElements_t tm;
+
+tm.Second = 0;
+tm.Minute = 8;
+tm.Hour = 23; // Hour in 24hrs
+tm.Day = 11; // Day of the month
+tm.Month = 1; // Month
+tm.Year = 23; // Year short year only 
+tm.Wday = 3; // Day of the week 0 - 6 each number can mean any day you like it just increments 0-
+
+rtc.write(tm); //Will write the value to the clock
+delay(5000);
+rtc.read(tm); // Will read new values to the tm structure obiviously only seconds will be different in this case
+```
+
+# Setup Trickle Charger
 ```
 #include <MAX31329.h>
 
