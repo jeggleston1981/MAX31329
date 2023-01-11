@@ -88,19 +88,24 @@ void MAX31329::squareWave(SQWAVE_FREQ freq)
 
 void MAX31329::enableCharger(bool charge)
 {
-    uint8_t enable = 0b10000001;
-    uint8_t disable = 0b00000001;
+    uint8_t power_reg = readRTC(MAX_CHARGER);
     if(charge){
-        Wire.beginTransmission(MAX_ADR);
-        Wire.write(MAX_CHARGER);
-        Wire.write(enable);
-        Wire.endTransmission();
+        power_reg = (power_reg & _BV(MAX_TRICKLE_ENABLE)) | 0x05;
     }else {
-        Wire.beginTransmission(MAX_ADR);
-        Wire.write(MAX_CHARGER);
-        Wire.write(disable);
-        Wire.endTransmission();
+        power_reg &= ~_BV(MAX_TRICKLE_ENABLE);
     }
+}
+
+void MAX31329::enableCharger(CHARGER charge)
+{
+	uint8_t power_reg = readRTC(MAX_CHARGER);
+	if (power_reg >= DISABLE){
+		power_reg |= _BV(MAX_TRICKLE_ENABLE);
+	}
+	else {
+		power_reg = (power_reg & _BV(MAX_TRICKLE_ENABLE)) | charge;
+	}
+	writeRTC(MAX_CHARGER, power_reg);
 }
 
 // Decimal-to-BCD conversion
