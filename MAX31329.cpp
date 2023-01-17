@@ -94,6 +94,7 @@ void MAX31329::enableCharger(bool charge)
     }else {
         power_reg &= ~_BV(MAX_TRICKLE_ENABLE);
     }
+	writeRTC(MAX_CHARGER, power_reg);
 }
 
 void MAX31329::enableCharger(CHARGER charge)
