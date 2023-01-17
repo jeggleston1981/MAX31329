@@ -100,11 +100,11 @@ void MAX31329::enableCharger(bool charge)
 void MAX31329::enableCharger(CHARGER charge)
 {
 	uint8_t power_reg = readRTC(MAX_CHARGER);
-	if (power_reg >= DISABLE){
-		power_reg |= _BV(MAX_TRICKLE_ENABLE);
+	if (charge >= DISABLE){
+		power_reg &= ~_BV(MAX_TRICKLE_ENABLE);
 	}
 	else {
-		power_reg = (power_reg & _BV(MAX_TRICKLE_ENABLE)) | charge;
+		power_reg = _BV(MAX_TRICKLE_ENABLE) | charge;
 	}
 	writeRTC(MAX_CHARGER, power_reg);
 }
